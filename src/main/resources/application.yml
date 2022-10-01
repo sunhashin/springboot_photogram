@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3307/photogram?serverTimezone=Asia/Seoul
+    username: cos
+    password: cos1234
+    
+  jpa:
+    open-in-view: true   # true 가 default, true : 세션 종료가 controller 앞단까지 유지, 레이지 로딩 가능
+    hibernate:
+      ddl-auto: update  # create : 서버 재실행시 인서트된 테이블 없어짐, 테이블 스키마 변경시 바꿔주고 동작 후 update 로 바꾸기, 프로덕션은 none 으로 해서 스키마 변경안되게 해야함
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+      
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 4MB
+
+  security:
+    user:
+      name: test
+      password: 1234   
+
+file:
+  path: G:\testSpringBoot\upload\
