@@ -106,3 +106,10 @@ SELECT u.id, u.username, u.profileImageUrl,
  FROM user u INNER JOIN subscribe s
 ON u.id = s.toUserId
 WHERE s.fromUserId = 2;
+
+
+/*
+SET FOREIGN_KEY_CHECKS = 0;  -- 제약 조건 잠시 끄기 0, 활성화 1
+drop TABLE comment;
+DROP TABLE image;
+*/

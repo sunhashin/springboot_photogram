@@ -21,7 +21,7 @@ spring:
   jpa:
     open-in-view: true   # true 가 default, true : 세션 종료가 controller 앞단까지 유지, 레이지 로딩 가능
     hibernate:
-      ddl-auto: update  # create : 서버 재실행시 인서트된 테이블 없어짐, 테이블 스키마 변경시 바꿔주고 동작 후 update 로 바꾸기, 프로덕션은 none 으로 해서 스키마 변경안되게 해야함
+      ddl-auto: update   # create : 서버 재실행시 인서트된 테이블 없어짐, 테이블 스키마 변경시 바꿔주고 동작 후 update 로 바꾸기, 프로덕션은 none 으로 해서 스키마 변경안되게 해야함
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
@@ -35,6 +35,13 @@ spring:
     user:
       name: test
       password: 1234   
-
+    oauth2:      client:        registration:
+           facebook:
+              client-id: 페북 개발자 센터에 등록한 앱아이디 #git 에 올릴때 주석처리 필요
+              client-secret: 페북 개발자 센터에 등록한 앱의 비밀정보  #git 에 올릴때 주석처리 필요
+              scope:              - public_profile
+              - email
+              
+        
 file:
   path: G:\testSpringBoot\upload\

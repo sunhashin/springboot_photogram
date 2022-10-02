@@ -7,6 +7,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.cos.photogramstart.config.oauth.OAuth2DetailsService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @EnableWebSecurity // 해당 파일(지금 이파일)로 시큐리티 활성화
 @Configuration // IOC  
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -17,6 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		// 부모 httpsecurity 설정 상속받아서 권한 자동 설정함, 생략시 권한 체크 안함
 //		super.configure(http);
 //	}
+	
+	private final OAuth2DetailsService oAuth2DetailsService;
 	
 	@Bean
 	public BCryptPasswordEncoder encode() {
@@ -37,6 +44,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()  // 로그인 요구 페이지 주소인 경우 폼 로그인을 사용해서 
 			.loginPage("/auth/signin")  // 로그인 페이지로 이동하고 GET - 인증필요한 페이지에 인증이 안되어 있는 경우 호출
 			.loginProcessingUrl("/auth/signin")  // 로그인 POST 요청  - 스프링 시큐리티가 로그인 프로세스 진행
-			.defaultSuccessUrl("/");  // 성공하면 / 로 보냄
+			.defaultSuccessUrl("/")  // 성공하면 / 로 보냄
+			.and()
+			.oauth2Login()  // form 로그인도 하는데, oAuth2 로그인도 할꺼야
+			.userInfoEndpoint()  // 하지만 코드를 구현하긴 구찮으니 oauth2 로그인을 하면 최종응답을 회원정보로 바로 받을 수 있다.
+			.userService(oAuth2DetailsService)
+			;
 	}
 }
