@@ -51,24 +51,12 @@ public class AuthController {
 	// public @ResponseBody String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {  //@Controller 이라도 @ResponseBody 붙어있으면 데이터 리턴
 	public  String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {
  
-		//전처리 -> 필터로 전환 가능
-		if (bindingResult.hasErrors()) {
-			Map<String, String> errorMap = new HashMap<>();
-				
-			for (FieldError error : bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage());
-			}
-			//throw new RuntimeException("유효성 검사 실패");
-			throw new CustomValidationException("유효성 검사 실패함", errorMap);
-		} else {
-			// User <- SignupDto 에 넣음 (회원가입 처리)
-			User user = signupDto.toEntity();
-			authService.회원가입(user);
-			
-			// 로그를 남기는 후처리
-			return "auth/signin";
-		}
-
-//		System.out.println("signup 실행됨?");
+		//전처리 -> 필터로 전환 가능 : /handler/aop/ValidtaionAdvice.java 에서 advice(ProceedingJoinPoint)로 일괄 처리
+		 // User <- SignupDto 에 넣음 (회원가입 처리)
+		User user = signupDto.toEntity();
+		authService.회원가입(user);
+		
+		// 로그를 남기는 후처리
+		return "auth/signin";
 	}
 }

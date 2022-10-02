@@ -70,4 +70,14 @@ public class User {  // 1
 		this.createDate = LocalDateTime.now();
 	}
 	
+	//  around 에서 객체 파라미터 보기 위해 출력할때 무한참조 걸려서 회피 위해서 user 객체 찍는 부분 빼줌
+	// .domain.user.User.images, could not initialize proxy - no Session
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", website="
+				+ website + ", bio=" + bio + ", email=" + email + ", phone=" + phone + ", gender=" + gender
+				+ ", profileImageUrl=" + profileImageUrl + ", role=" + role + ", createDate="
+				+ createDate + "]";
+	}
+	
 }

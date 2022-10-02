@@ -46,13 +46,13 @@ public class ControllerExcecptionHandler {
 	
 	@ExceptionHandler(CustomValidationApiException.class)  // ajax 통신시 ResponseEntity 를 사용하면 Http 상태코드를 반환하여 dom 에서 자동으로 분기하게 하려고
 	public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
-		System.out.println("====================== 나 실행됨");
+		System.out.println("====================== validationApiException 실행됨");
 		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(CustomApiException.class)  // ajax 통신시 ResponseEntity 를 사용하면 Http 상태코드를 반환하여 dom 에서 자동으로 분기하게 하려고
 	public ResponseEntity<?> apiException(CustomApiException e) {
-		System.out.println("====================== 나 api 예외 실행됨");
+		System.out.println("====================== 나 apiException api 예외 실행됨");
 		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST);
 	}
 	

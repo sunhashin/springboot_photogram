@@ -20,7 +20,7 @@ public class CommentService {
 	private final UserRepository userRepository;
 	
 	@Transactional
-	public Comment 댓글쓰기(String content, int imageId, int userId) {
+	public Comment 댓글쓰기(String content, int imageId, int userId) { 
 		
 		// Tip : 객체를 만들 때 id 값만 담아서 insert 할 수 있다, 아니면 findById 해서 찾아서 해야함
 		// 대신 return 시에 image 객체는 id 값만 가지고 있는 빈 객체를 리턴받는다.
